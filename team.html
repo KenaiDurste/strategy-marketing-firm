@@ -2,25 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Team — Strategy Marketing Firm</title>
     <meta
       name="description"
-      content="The senior team behind Strategy Marketing Firm — strategists, designers, media planners and writers who stay on the work."
+      content="The team behind Strategy Marketing Firm — the people who plan, build and run your campaigns, and who stay on the work."
     />
+    <link rel="canonical" href="https://strategymarketingfirm.com/team.html" />
     <meta name="theme-color" content="#2b2a47" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Schibsted+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Strategy Marketing Firm" />
+    <meta property="og:title" content="Team — Strategy Marketing Firm" />
+    <meta
+      property="og:description"
+      content="Two people, no bench. The people you meet in the first conversation are the ones who write the strategy and run the campaigns."
     />
+    <meta property="og:url" content="https://strategymarketingfirm.com/team.html" />
+    <meta
+      property="og:image"
+      content="https://strategymarketingfirm.com/assets/img/og-card.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A white knight on a deep indigo ground, above the Strategy Marketing Firm wordmark."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
-    <link rel="preload" as="image" href="assets/img/knight.png" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="assets/fonts/archivo-latin.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="assets/fonts/schibsted-latin.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="image" href="assets/img/knight-w.png" />
     <script>
-      document.documentElement.classList.add("js-reveal");
+      /* see index.html — the timer is what stops a missing main.js from
+         leaving every heading and paragraph invisible for good */
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js-reveal");
+        window.revealFallback = setTimeout(function () {
+          root.classList.remove("js-reveal");
+        }, 2500);
+      })();
     </script>
   </head>
   <body>
@@ -29,7 +70,7 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="index.html">
-          <img src="assets/img/knight.png" alt="" width="279" height="458" />
+          <img src="assets/img/knight-w.png" alt="" width="282" height="503" />
           <span>
             Strategy
             <span class="brand__sub">Marketing Firm</span>
@@ -58,90 +99,34 @@
     <main id="main">
       <section class="section page-head">
         <div class="shell">
-          <h1 class="h-xl r-rise" style="max-width: 14ch">
-            Eight people. No bench.
-          </h1>
-          <p class="lede r-fade" style="margin-top: 1.75rem">
+          <h1 class="h-xl r-rise">Two people. No bench.</h1>
+          <p class="lede r-fade">
             We stayed small on purpose. The people you meet in the first
-            conversation are the ones who write the strategy, design the work
-            and sit in the monthly review.
+            conversation are the ones who write the strategy, build the
+            campaigns and sit in the monthly review.
           </p>
         </div>
       </section>
 
-      <div class="board-rule" aria-hidden="true"></div>
-
       <section class="section">
         <div class="shell">
-          <p class="lede r-fade" style="margin-bottom: 2.5rem">
-            Placeholder team: the people, portraits and biographies below are
-            sample content for this preview, not real staff.
-          </p>
-
+          <h2 class="u-visually-hidden">The team</h2>
           <div class="team-grid">
             <article class="member r-fade">
               <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">MO</span>
+                <span class="member__initials" aria-hidden="true">KD</span>
               </div>
-              <h3>Marguerite Okonjo</h3>
-              <p class="member__role">Founder &amp; Principal Strategist</p>
-              <p class="member__bio">Spent twelve years running brand strategy inside consumer businesses before deciding the interesting problems were on the other side of the table. Writes every position paper herself.</p>
+              <h3>Kenai Dursteler</h3>
+              <p class="member__role">Founder &middot; Creative &amp; AI</p>
+              <p class="member__bio">Owns everything that gets made: concepts, video and imagery, and the AI production pipeline that turns one idea into the five variants a test actually needs. Works as a PR associate at Crumbl.</p>
             </article>
             <article class="member r-fade">
               <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">DR</span>
+                <span class="member__initials" aria-hidden="true">RD</span>
               </div>
-              <h3>Dev Ramaswamy</h3>
-              <p class="member__role">Partner, Growth</p>
-              <p class="member__bio">Built and sold a performance agency, then got tired of selling clicks without a story attached. Owns media planning and the numbers nobody wants to look at.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">HL</span>
-              </div>
-              <h3>Hana Lindqvist</h3>
-              <p class="member__role">Creative Director</p>
-              <p class="member__bio">Former editorial designer with an unreasonable attachment to type. Leads identity work and argues, usually correctly, for less on the page.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">TB</span>
-              </div>
-              <h3>Tom&aacute;s Barreto</h3>
-              <p class="member__role">Head of Content</p>
-              <p class="member__bio">Ten years as a business journalist, which shows up as an allergy to marketing language. Runs editorial across every retained account.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">AK</span>
-              </div>
-              <h3>Amara Kealoha</h3>
-              <p class="member__role">Strategy Director</p>
-              <p class="member__bio">Runs research and customer interviews. Has a talent for finding the sentence a client keeps saying without noticing, and turning it into a position.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">JW</span>
-              </div>
-              <h3>Jonah Weiss</h3>
-              <p class="member__role">Design Lead</p>
-              <p class="member__bio">Product designer by training, which means the brand systems he builds actually work at small sizes and in dark mode. Keeps the asset library honest.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">PN</span>
-              </div>
-              <h3>Priya Nandakumar</h3>
-              <p class="member__role">Media Manager</p>
-              <p class="member__bio">Handles paid search and social day to day. Moves budget weekly and reports what moved it, including the tests that failed.</p>
-            </article>
-            <article class="member r-fade">
-              <div class="member__portrait">
-                <span class="member__initials" aria-hidden="true">EF</span>
-              </div>
-              <h3>Ewan Fitzgerald</h3>
-              <p class="member__role">Client Partner</p>
-              <p class="member__bio">The person who makes sure the plan and the calendar agree with each other. Twenty years of running engagements without letting them drift.</p>
+              <h3>Ryken Dursteler</h3>
+              <p class="member__role">Co-founder &middot; Paid Media</p>
+              <p class="member__bio">Three years running paid media at Crumbl — programmatic, paid search and paid social, plus the strategy and ad copy behind them. Certified across Meta, Google, The Trade Desk and Pinterest.</p>
             </article>
           </div>
         </div>
@@ -149,18 +134,12 @@
 
       <section class="section section--light">
         <div class="shell split">
-          <h2 class="h-lg r-rise">We hire slowly and staff thinly.</h2>
+          <h2 class="h-lg r-rise">Small on purpose.</h2>
           <div>
             <p class="lede r-fade">
               There is no growth target attached to headcount. We add a person
               when a discipline is genuinely stretched, and we would rather turn
-              down a project than staff it with people who have not done the
-              work before.
-            </p>
-            <p class="r-fade" style="margin-top: 2.25rem">
-              <a class="btn" href="mailto:careers@strategymarketingfirm.com"
-                >See open roles</a
-              >
+              down work than staff it with someone who has not done it before.
             </p>
           </div>
         </div>
@@ -169,10 +148,8 @@
       <section class="contact" id="contact">
         <div class="contact__inner">
           <div>
-            <h2 class="h-lg r-rise" style="max-width: 18ch">
-              Meet the people, not a pitch team.
-            </h2>
-            <p class="lede r-fade" style="margin-top: 1.5rem">
+            <h2 class="h-lg r-rise">Meet the people, not a pitch team.</h2>
+            <p class="lede r-fade">
               Send a note and we will put you in front of whoever would actually
               run the work. No account executive in between.
             </p>
@@ -186,15 +163,12 @@
       </section>
     </main>
 
-    <div class="board-rule" aria-hidden="true"></div>
-
     <footer class="site-footer">
       <div class="site-footer__inner">
         <div>
           <h2>Strategy Marketing Firm</h2>
-          <p style="max-width: 30ch">
-            A senior marketing team for businesses that would rather plan than
-            react.
+          <p>
+            Paid advertising for businesses that would rather plan than react.
           </p>
         </div>
         <div>
@@ -213,29 +187,18 @@
                 >hello@strategymarketingfirm.com</a
               >
             </li>
-            <li><a href="tel:+15551180042">+1 (555) 118-0042</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Studio</h2>
-          <ul>
-            <li>412 Rook Street, Floor 6</li>
-            <li>Chicago, IL 60607</li>
+            <li><a href="tel:+13852361960">+1 (385) 236-1960</a></li>
           </ul>
         </div>
       </div>
       <div class="site-footer__bar">
         <div>
           <span>© 2026 Strategy Marketing Firm. All rights reserved.</span>
-          <span>Placeholder content for preview.</span>
         </div>
       </div>
     </footer>
 
-    <script src="assets/js/vendor/gsap.min.js" defer></script>
-    <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-      <script src="assets/js/vendor/gsap.min.js" defer></script>
+        <script src="assets/js/vendor/gsap.min.js" defer></script>
     <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="assets/js/main.js" defer></script>
   </body>

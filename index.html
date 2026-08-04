@@ -1,42 +1,73 @@
 <!DOCTYPE html>
-<!--
-  DIRECTION CONTRACT
-  THESIS: A marketing site that argues by demonstration — the knight actually takes
-  the board while you scroll. Refuses the agency template of eyebrow, stat band and
-  four identical service cards.
-  OWN-WORLD: Drenched indigo (#2b2a47) ground, off-white relief blocks, one faceted
-  white knight mark in flat planes (white / #c8c7d6 / #9695ae). Archivo expanded at
-  weight, Schibsted Grotesk for reading. Board-edge rules as the only ornament.
-  STORY: This firm plans several moves ahead; the visitor sees a sequence, not a
-  slogan, and writes in.
-  FIRST VIEWPORT: Navy field, white knight held high and centred, name hidden beneath
-  until the scroll lifts the piece away.
-  FORM: Chess notation and the captured-piece diagram, brief-pinned by the client's
-  own logo art and interaction request; no roll taken.
-  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
--->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Strategy Marketing Firm — Marketing, played several moves ahead</title>
     <meta
       name="description"
-      content="Strategy Marketing Firm is a marketing agency for ambitious businesses. Brand strategy, identity, digital campaigns and content — planned like a well-considered opening."
+      content="Strategy Marketing Firm plans and runs paid advertising for ambitious businesses. Ad strategy, campaign build, creative and measurement — planned like a well-considered opening."
     />
+    <link rel="canonical" href="https://strategymarketingfirm.com/" />
     <meta name="theme-color" content="#2b2a47" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Schibsted+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Strategy Marketing Firm" />
+    <meta
+      property="og:title"
+      content="Strategy Marketing Firm — Marketing, played several moves ahead"
     />
+    <meta
+      property="og:description"
+      content="Growth is not luck. It is a sequence of good decisions made in the right order. We plan yours."
+    />
+    <meta property="og:url" content="https://strategymarketingfirm.com/" />
+    <meta
+      property="og:image"
+      content="https://strategymarketingfirm.com/assets/img/og-card.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A white knight on a deep indigo ground, above the Strategy Marketing Firm wordmark."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
-    <link rel="preload" as="image" href="assets/img/knight.png" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="assets/fonts/archivo-latin.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="assets/fonts/schibsted-latin.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="image" href="assets/img/knight-w.png" />
     <script>
-      document.documentElement.classList.add("js-reveal");
+      /* The reveal styles hide their targets until the observer in main.js
+         releases them, so this class is a promise that main.js will run. If it
+         404s, is blocked, or throws, nothing else clears it and every heading
+         and paragraph on the page stays at opacity 0 for good. The timer is
+         the fallback: whatever happens to the script, the copy appears. */
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js-reveal");
+        window.revealFallback = setTimeout(function () {
+          root.classList.remove("js-reveal");
+        }, 2500);
+      })();
     </script>
   </head>
   <body>
@@ -45,7 +76,7 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="index.html">
-          <img src="assets/img/knight.png" alt="" width="279" height="458" />
+          <img src="assets/img/knight-w.png" alt="" width="282" height="503" />
           <span>
             Strategy
             <span class="brand__sub">Marketing Firm</span>
@@ -76,7 +107,7 @@
       <section class="hero" aria-label="Introduction">
         <div class="hero__stage">
           <div class="hero__knight" aria-hidden="true">
-            <img src="assets/img/knight.png" alt="" width="279" height="458" />
+            <img src="assets/img/knight-w.png" alt="" width="282" height="503" />
           </div>
 
           <div class="hero__wordmark">
@@ -86,7 +117,7 @@
             </h1>
             <p class="hero__tagline">
               Growth is not luck. It is a sequence of good decisions made in the
-              right order — and we plan yours several moves ahead.
+              right order. We plan yours.
             </p>
           </div>
 
@@ -100,207 +131,162 @@
       <!-- ================= POSITIONING ================= -->
       <section class="section section--light">
         <div class="shell split">
-          <h2 class="h-lg r-rise">Most marketing reacts. We prefer to plan.</h2>
+          <h2 class="h-lg r-rise">Most advertising reacts. We prefer to plan.</h2>
           <div>
             <p class="lede r-fade">
-              Campaigns fail when they are assembled one tactic at a time. We
-              start with the board: your market, your position, and the handful
-              of moves that actually change the outcome. Everything we build
-              after that serves the plan.
+              Ad accounts fail when they are assembled one tactic at a time — a
+              campaign here, an audience there, a creative refresh whenever
+              performance dips. We start with the board: your market, your
+              offer, and the handful of moves that actually change the outcome.
+              Everything we spend after that serves the plan.
             </p>
-            <p class="lede r-fade" style="margin-top: 1.5rem">
-              We work as a small senior team, embedded with yours, measured on
-              the numbers you already care about.
+            <p class="lede r-fade">
+              We are a small team, embedded with yours, measured on the numbers
+              you already care about. We are also new, and taking on a
+              deliberately small number of clients this year — so there are no
+              account managers and no handoffs. The people you meet are the
+              people doing the work.
             </p>
-            <p class="r-fade" style="margin-top: 2.25rem">
+            <p class="cta-row r-fade">
               <a class="btn" href="services.html">See how we work</a>
             </p>
           </div>
         </div>
       </section>
 
-      <!-- ================= GAMBIT: five captures ================= -->
-      <section class="gambit" aria-label="How we take a position">
-        <div class="gambit__stage">
-          <div class="gambit__scene" aria-hidden="true">
-            <div class="gambit__line"></div>
+      <!-- ================= CAPTURE 1: paid ad strategy ================= -->
+      <section class="capture" data-from="right" style="--tx: 28%; --tr: 1">
+       <div class="capture__frame">
+        <div class="capture__scene" aria-hidden="true">
+          <div class="capture__slot capture__slot--target">
+            <div class="capture__target">
+              <img src="assets/img/pc-pawn.png" alt="" width="257" height="430" loading="lazy" decoding="async" />
+            </div>
+          </div>
 
-            <div class="gambit__slot" style="left: 13%">
-              <div class="gambit__piece">
-                <img src="assets/img/piece-pawn.png" alt="" width="248" height="393" loading="lazy" decoding="async" />
-              </div>
-              <span class="gambit__move">Nxb1</span>
-              <span class="gambit__file">b</span>
+          <div class="capture__slot capture__slot--knight">
+            <div class="capture__knight">
+              <img src="assets/img/knight-w.png" alt="" width="282" height="503" loading="lazy" decoding="async" />
             </div>
-            <div class="gambit__slot" style="left: 31%">
-              <div class="gambit__piece">
-                <img src="assets/img/piece-rook.png" alt="" width="273" height="445" loading="lazy" decoding="async" />
-              </div>
-              <span class="gambit__move">Nxc3</span>
-              <span class="gambit__file">c</span>
-            </div>
-            <div class="gambit__slot" style="left: 50%">
-              <div class="gambit__piece">
-                <img src="assets/img/piece-bishop.png" alt="" width="267" height="553" loading="lazy" decoding="async" />
-              </div>
-              <span class="gambit__move">Nxe4</span>
-              <span class="gambit__file">e</span>
-            </div>
-            <div class="gambit__slot" style="left: 69%">
-              <div class="gambit__piece">
-                <img src="assets/img/piece-queen.png" alt="" width="272" height="625" loading="lazy" decoding="async" />
-              </div>
-              <span class="gambit__move">Nxf6</span>
-              <span class="gambit__file">f</span>
-            </div>
-            <div class="gambit__slot" style="left: 87%">
-              <div class="gambit__piece">
-                <img src="assets/img/piece-king.png" alt="" width="273" height="694" loading="lazy" decoding="async" />
-              </div>
-              <span class="gambit__move">Nxh5</span>
-              <span class="gambit__file">h</span>
-            </div>
+          </div>
+        </div>
 
-            <ul class="gambit__taken">
-              <li><img src="assets/img/piece-pawn.png" alt="" width="248" height="393" loading="lazy" decoding="async" /></li>
-              <li><img src="assets/img/piece-rook.png" alt="" width="273" height="445" loading="lazy" decoding="async" /></li>
-              <li><img src="assets/img/piece-bishop.png" alt="" width="267" height="553" loading="lazy" decoding="async" /></li>
-              <li><img src="assets/img/piece-queen.png" alt="" width="272" height="625" loading="lazy" decoding="async" /></li>
-              <li><img src="assets/img/piece-king.png" alt="" width="273" height="694" loading="lazy" decoding="async" /></li>
+        <div class="capture__copy">
+          <div class="capture__inner">
+            <h2 class="capture__title">Paid Ad Strategy</h2>
+            <p class="capture__lede">
+              Most ad accounts get built by launching something and fixing it later. We decide first — the offer, who it is for, and which platforms can actually reach them — so the budget starts pointed somewhere instead of finding its way there.
+            </p>
+            <ul class="capture__tags">
+              <li>Offer and audience</li>
+              <li>Channel selection</li>
+              <li>Budget modelling</li>
             </ul>
-
-            <div class="gambit__knight">
-              <img src="assets/img/knight.png" alt="" width="279" height="458" loading="lazy" decoding="async" />
+          </div>
+        </div>
+       </div>
+      </section>
+      <!-- ================= CAPTURE 2: campaign build ================= -->
+      <section class="capture" data-from="left" style="--tx: 68%; --tr: 1.409">
+       <div class="capture__frame">
+        <div class="capture__scene" aria-hidden="true">
+          <div class="capture__slot capture__slot--target">
+            <div class="capture__target">
+              <img src="assets/img/pc-bishop.png" alt="" width="284" height="606" loading="lazy" decoding="async" />
             </div>
           </div>
 
-          <div class="gambit__copy">
-            <div class="gambit__beats">
-              <article class="gambit__beat">
-                <h2>See the whole board.</h2>
-                <p>
-                  Two weeks of interviews, analytics and competitor teardown
-                  before anyone opens a design file.
-                </p>
-              </article>
-
-              <article class="gambit__beat">
-                <h2>Pick the move that matters.</h2>
-                <p>
-                  One strategic bet, named out loud, with the number that will
-                  prove it right or wrong. Everything else gets cut.
-                </p>
-              </article>
-
-              <article class="gambit__beat">
-                <h2>Commit before they do.</h2>
-                <p>
-                  Identity, messaging and media built together and shipped on a
-                  date, not circulated for another round of opinions.
-                </p>
-              </article>
-
-              <article class="gambit__beat">
-                <h2>Take the position they wanted.</h2>
-                <p>
-                  Own the claim your competitors were still workshopping, in the
-                  places your buyers already spend their attention.
-                </p>
-              </article>
-
-              <article class="gambit__beat">
-                <h2>Then hold it.</h2>
-                <p>
-                  A fixed cadence, a monthly review, and budget that follows
-                  whatever the evidence says is working.
-                </p>
-              </article>
+          <div class="capture__slot capture__slot--knight">
+            <div class="capture__knight">
+              <img src="assets/img/knight-w.png" alt="" width="282" height="503" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
+
+        <div class="capture__copy">
+          <div class="capture__inner">
+            <h2 class="capture__title">Campaign Build</h2>
+            <p class="capture__lede">
+              Campaigns fail quietly when the plumbing is wrong — overlapping audiences, tangled account structure, tracking nobody ever verified. We build the account so the numbers it reports can be trusted, because every decision after this one depends on them.
+            </p>
+            <ul class="capture__tags">
+              <li>Account structure</li>
+              <li>Conversion tracking</li>
+              <li>Audience setup</li>
+            </ul>
+          </div>
+        </div>
+       </div>
       </section>
-
-      <!-- ================= OFFER ================= -->
-      <section class="section section--light">
-        <div class="shell">
-          <h2 class="h-lg measure r-rise" style="margin-bottom: 3rem">
-            Four disciplines, run as one game plan.
-          </h2>
-
-          <div class="offer">
-            <div class="offer__row r-fade">
-              <h3>Brand Strategy</h3>
-              <div>
-                <p>
-                  Positioning, messaging and narrative built on real market
-                  evidence — so every campaign afterwards argues the same case.
-                </p>
-                <ul class="offer__tags">
-                  <li>Market analysis</li>
-                  <li>Customer interviews</li>
-                  <li>Messaging framework</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="offer__row r-fade">
-              <h3>Identity &amp; Design</h3>
-              <div>
-                <p>
-                  Visual systems that hold up across a billboard, a pitch deck
-                  and a 320-pixel screen without losing their nerve.
-                </p>
-                <ul class="offer__tags">
-                  <li>Marks and type</li>
-                  <li>Guidelines</li>
-                  <li>Campaign art direction</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="offer__row r-fade">
-              <h3>Digital Campaigns</h3>
-              <div>
-                <p>
-                  Paid, organic and lifecycle programmes planned as one funnel,
-                  with budget moved toward whatever is actually working.
-                </p>
-                <ul class="offer__tags">
-                  <li>Media planning</li>
-                  <li>Paid search and social</li>
-                  <li>Attribution</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="offer__row r-fade">
-              <h3>Content &amp; Editorial</h3>
-              <div>
-                <p>
-                  Writing, video and design produced on a cadence your audience
-                  can rely on, tied back to demand rather than vanity reach.
-                </p>
-                <ul class="offer__tags">
-                  <li>Editorial strategy</li>
-                  <li>Long-form and video</li>
-                  <li>Organic growth</li>
-                </ul>
-              </div>
+      <!-- ================= CAPTURE 3: ad creative ================= -->
+      <section class="capture" data-from="right" style="--tx: 30%; --tr: 1.13">
+       <div class="capture__frame">
+        <div class="capture__scene" aria-hidden="true">
+          <div class="capture__slot capture__slot--target">
+            <div class="capture__target">
+              <img src="assets/img/pc-rook.png" alt="" width="284" height="486" loading="lazy" decoding="async" />
             </div>
           </div>
 
-          <p class="r-fade" style="margin-top: 3rem">
-            <a class="btn" href="services.html">All services</a>
-          </p>
+          <div class="capture__slot capture__slot--knight">
+            <div class="capture__knight">
+              <img src="assets/img/knight-w.png" alt="" width="282" height="503" loading="lazy" decoding="async" />
+            </div>
+          </div>
         </div>
-      </section>
 
-      <div class="board-rule" aria-hidden="true"></div>
+        <div class="capture__copy">
+          <div class="capture__inner">
+            <h2 class="capture__title">Ad Creative</h2>
+            <p class="capture__lede">
+              Most ads are made once, on instinct, and left running until the results get bad enough to notice. We build your creative into sets designed to be tested against each other, so you learn what your audience responds to instead of guessing at it.
+            </p>
+            <ul class="capture__tags">
+              <li>Ad copy</li>
+              <li>Static and video</li>
+              <li>Creative testing</li>
+            </ul>
+          </div>
+        </div>
+       </div>
+      </section>
+      <!-- ================= CAPTURE 4: measurement ================= -->
+      <section class="capture" data-from="left" style="--tx: 67%; --tr: 1.59">
+       <div class="capture__frame">
+        <div class="capture__scene" aria-hidden="true">
+          <div class="capture__slot capture__slot--target">
+            <div class="capture__target">
+              <img src="assets/img/pc-queen.png" alt="" width="292" height="684" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div class="capture__slot capture__slot--knight">
+            <div class="capture__knight">
+              <img src="assets/img/knight-w.png" alt="" width="282" height="503" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+
+        <div class="capture__copy">
+          <div class="capture__inner">
+            <h2 class="capture__title">Measurement</h2>
+            <p class="capture__lede">
+              A dashboard nobody acts on is just a bill you read once a month. We report on what the spend actually returned and move budget toward what is working — including telling you when the honest answer is to spend less.
+            </p>
+            <ul class="capture__tags">
+              <li>Attribution</li>
+              <li>Monthly reporting</li>
+              <li>Budget reallocation</li>
+            </ul>
+          </div>
+        </div>
+       </div>
+      </section>
 
       <!-- ================= PROCESS ================= -->
       <section class="section">
         <div class="shell">
-          <h2 class="h-lg measure r-rise" style="margin-bottom: 3rem">
+          <h2 class="h-lg measure r-rise">
             A short game, played deliberately.
           </h2>
 
@@ -322,8 +308,8 @@
             <li class="r-fade">
               <h3>Build the pieces</h3>
               <p>
-                Identity, messaging, creative and channel plans produced
-                together so nothing arrives out of sync.
+                Accounts, tracking and creative produced together, so the
+                campaign launches with its measurement already working.
               </p>
             </li>
             <li class="r-fade">
@@ -338,38 +324,55 @@
         </div>
       </section>
 
-      <div class="board-rule" aria-hidden="true"></div>
-
-      <!-- ================= CONTACT ================= -->
-      <section class="contact" id="contact">
-        <div class="contact__inner">
-          <div>
-            <h2 class="h-lg r-rise" style="max-width: 18ch">
-              Tell us what you are trying to grow.
-            </h2>
-            <p class="lede r-fade" style="margin-top: 1.5rem">
-              Send a short note about the business and the number you are trying
-              to move. The first conversation is a conversation — not a pitch.
-            </p>
+      <!-- ================= CHECKMATE: knight and rook, lone king ================= -->
+      <section class="capture mate" id="contact" style="--tr: 1.77" aria-label="Contact">
+       <div class="capture__frame">
+        <div class="capture__scene" aria-hidden="true">
+          <div class="capture__slot" style="--x: 62%">
+            <div class="capture__target mate__king">
+              <img src="assets/img/pc-king.png" alt="" width="292" height="761" loading="lazy" decoding="async" />
+            </div>
           </div>
-          <div class="r-fade">
-            <a class="btn" href="mailto:hello@strategymarketingfirm.com"
-              >Start a conversation</a
-            >
+
+          <div class="capture__slot" style="--x: 38%">
+            <div class="capture__knight">
+              <img src="assets/img/knight-w.png" alt="" width="282" height="503" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div class="capture__slot" style="--x: 82%">
+            <div class="capture__ally" style="--r: 1.13">
+              <img src="assets/img/rook-w.png" alt="" width="256" height="486" loading="lazy" decoding="async" />
+            </div>
           </div>
         </div>
+
+        <div class="capture__copy">
+          <div class="capture__inner">
+            <h2 class="capture__title">Checkmate is never one move.</h2>
+            <p class="capture__lede">
+              It is two pieces in the right place, set up long before anyone saw
+              it coming. Tell us what you are trying to grow and we will show
+              you the sequence. The first conversation is a conversation — not a
+              pitch.
+            </p>
+            <p class="capture__cta">
+              <a class="btn" href="mailto:hello@strategymarketingfirm.com"
+                >Start a conversation</a
+              >
+            </p>
+          </div>
+        </div>
+       </div>
       </section>
     </main>
-
-    <div class="board-rule" aria-hidden="true"></div>
 
     <footer class="site-footer">
       <div class="site-footer__inner">
         <div>
           <h2>Strategy Marketing Firm</h2>
-          <p style="max-width: 30ch">
-            A senior marketing team for businesses that would rather plan than
-            react.
+          <p>
+            Paid advertising for businesses that would rather plan than react.
           </p>
         </div>
         <div>
@@ -388,21 +391,13 @@
                 >hello@strategymarketingfirm.com</a
               >
             </li>
-            <li><a href="tel:+15551180042">+1 (555) 118-0042</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Studio</h2>
-          <ul>
-            <li>412 Rook Street, Floor 6</li>
-            <li>Chicago, IL 60607</li>
+            <li><a href="tel:+13852361960">+1 (385) 236-1960</a></li>
           </ul>
         </div>
       </div>
       <div class="site-footer__bar">
         <div>
           <span>© 2026 Strategy Marketing Firm. All rights reserved.</span>
-          <span>Placeholder content for preview.</span>
         </div>
       </div>
     </footer>
