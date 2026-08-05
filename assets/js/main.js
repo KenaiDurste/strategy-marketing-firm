@@ -153,7 +153,18 @@
 
   var hero = document.querySelector(".hero");
 
-  if (hero) {
+  /* Below 900px the hero is a plain block: the piece is already at its resting
+     angle, the name is already there, and there is nothing to scrub. Running
+     the timeline anyway is what produced the worst of both — 265vh of scrolling
+     that turned a flat image and never paid off, because the rendered sequence
+     is desktop-only. The same breakpoint gates both, so they cannot disagree.
+
+     Read once. Crossing 900px afterwards needs a reload; the alternative is
+     tearing down and rebuilding a scrubbed timeline mid-drag, which is a great
+     deal of machinery for a window nobody resizes past that point. */
+  var SPIN_MIN_WIDTH = 900;
+
+  if (hero && innerWidth >= SPIN_MIN_WIDTH) {
     var knight = hero.querySelector(".hero__knight");
     var wordmark = hero.querySelector(".hero__wordmark");
     var cue = hero.querySelector(".hero__cue");
@@ -271,7 +282,7 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function loadSequence() {
-      if (!canvas || seq || innerWidth < 900 || reduce.matches) return;
+      if (!canvas || seq || innerWidth < SPIN_MIN_WIDTH || reduce.matches) return;
 
       var sheets = [];
       var loaded = 0;

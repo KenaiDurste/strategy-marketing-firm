@@ -1293,6 +1293,41 @@ main {
   grid-template-columns: minmax(0, 1fr);
 }
 
+/* ---------- hero below the spin breakpoint ----------
+   The rendered turntable is desktop-only, so on a phone the scroll sequence was
+   265vh of scrubbing that turned a flat image and arrived nowhere. There is
+   nothing to scrub toward, so the hero stops being a scroll stage and becomes
+   an ordinary block: the name is there on arrival and the piece is already at
+   the angle the desktop version spends two screens reaching.
+
+   Must stay ahead of the reduced-motion block, which has to remain last. */
+@media (max-width: 899.98px) {
+  .hero {
+    height: auto;
+  }
+
+  .hero__stage {
+    position: static;
+    height: auto;
+    /* tall enough that the piece behind the type is not clipped by the stage */
+    min-height: 27rem;
+    padding-block: clamp(3.5rem, 11vh, 6rem) clamp(3rem, 8vh, 4.5rem);
+  }
+
+  .hero__knight {
+    top: 50%;
+    transform: translateY(-48%);
+    width: clamp(10rem, 46vw, 15rem);
+    /* the weight the desktop hero settles to, so type still reads over it */
+    opacity: 0.38;
+  }
+
+  /* the cue pointed at the sequence, and the sequence is gone */
+  .hero__cue {
+    display: none;
+  }
+}
+
 /* ---------- reduced motion ----------
    LAST IN THE FILE, and it has to stay last. Everything here overrides a rule
    declared earlier at the same specificity — .capture's height, the frame's

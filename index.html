@@ -107,12 +107,21 @@
       <section class="hero" aria-label="Introduction">
         <div class="hero__stage">
           <div class="hero__knight" aria-hidden="true">
-            <img
-              src="assets/img/knight-hero.png"
-              alt=""
-              width="430"
-              height="700"
-            />
+            <picture>
+              <!-- below 900px the scroll sequence never runs, so the hero opens
+                   on the pose it would have landed on rather than the one it
+                   would have started from -->
+              <source
+                media="(max-width: 899.98px)"
+                srcset="assets/img/knight-hero-rest.png"
+              />
+              <img
+                src="assets/img/knight-hero.png"
+                alt=""
+                width="430"
+                height="700"
+              />
+            </picture>
             <canvas class="hero__spin" width="430" height="700"></canvas>
           </div>
 
