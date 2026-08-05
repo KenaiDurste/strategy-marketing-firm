@@ -570,25 +570,38 @@ p {
   height: auto;
 }
 
-/* The rendered turntable replaces the flat mark only once every frame has
-   decoded — swapping earlier would show a gap where the knight should be. The
-   canvas sits exactly on top of the still, so the handover is invisible: same
-   box, same position, and the CSS transforms driving tilt, scale and lift are
-   on the shared parent, so they never stop or restart. */
+/* The still under this canvas is frame 0 of the same turntable at the same
+   430x700, so the handover is not a transition at all — the canvas draws the
+   pose that is already on screen and nothing moves.
+
+   It used to be the flat mark at 282x503: a different pose *and* a different
+   aspect, so the piece visibly snapped and resized the moment the sheets
+   finished downloading. Instant on localhost, a second or two for a real
+   visitor. The fade below is only insurance against sub-pixel differences
+   between a decoded PNG and a canvas draw of the same image. */
 .hero__spin {
-  display: none;
   position: absolute;
   inset: 0;
   width: 100%;
-  height: auto;
-}
-
-.hero__knight.is-spinning img {
-  visibility: hidden;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.25s linear;
 }
 
 .hero__knight.is-spinning .hero__spin {
-  display: block;
+  opacity: 1;
+}
+
+/* The still has to leave as the canvas arrives. Without this it stays stacked
+   underneath — a second knight, holding its pose under the parent's tilt while
+   the canvas turns above it. Both sides show the same frame at the moment of
+   the swap, so crossfading them is invisible rather than a dissolve. */
+.hero__knight img {
+  transition: opacity 0.25s linear;
+}
+
+.hero__knight.is-spinning img {
+  opacity: 0;
 }
 
 .hero__cue {

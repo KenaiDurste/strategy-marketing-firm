@@ -186,17 +186,24 @@
           start: "top top",
           end: "bottom bottom",
           scrub: 1.4,
-          onUpdate: applySpin,
         },
+        /* on the timeline, not on the ScrollTrigger. A ScrollTrigger's onUpdate
+           fires when the *scroll position* changes; under scrub the playhead
+           goes on easing toward its target after scrolling stops. Sampling the
+           angle from there drew whatever frame the last scroll event happened
+           to catch, so the piece never quite arrived — most visibly on the way
+           back up, where it settled a step short of its opening pose. The
+           timeline's onUpdate fires whenever the playhead itself moves. */
+        onUpdate: applySpin,
       })
       .to(cue, { opacity: 0, y: 14, duration: 0.1 }, 0)
-      /* A turn and a bit, finishing somewhere deliberate: 390 lands on 30deg,
-         a shallow forward three-quarter — the head still points left as the
-         mark does, but turned far enough toward the viewer to show the front of
-         the face rather than its edge. The sequence is rendered every 3deg, so
-         30 is the lattice point next to the 29 that was asked for; a degree of
-         yaw on a piece this size is below what the eye resolves. Two full turns
-         read as frantic at this scrub, and the pacing was tuned once already. */
+      /* Read through REST_DEG: the piece opens head-on and 390 carries it a
+         full turn round to 30deg, the shallow forward three-quarter.
+         The head still points left as the mark does, but turned far enough
+         toward the viewer to show the front of the face rather than its edge.
+         The sequence is rendered every 3deg, so 30 is the lattice point next to
+         the 29 that was asked for; a degree of yaw on a piece this size is
+         below what the eye resolves. */
       .to(spin, { deg: 190, ease: "none", duration: 0.34 }, 0)
       .to(spin, { deg: 390, ease: "power2.out", duration: 0.38 }, 0.34)
       .to(
@@ -258,6 +265,7 @@
     var COLS = 6;
     var PER_SHEET = 30;
     var SHEETS = FRAMES / PER_SHEET;
+    var REST_DEG = 0;       // head-on: the piece looks straight out to open
 
     var canvas = knight.querySelector(".hero__spin");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -288,7 +296,11 @@
       var ctx = canvas.getContext("2d");
       seq = {
         draw: function (deg) {
-          var t = ((deg % 360) + 360) % 360;
+          // REST_DEG is the pose at the top of the page. It is a separate dial
+          // from the timeline's angles so the opening can be chosen without
+          // moving the landing: the lookup is offset here, and the landing
+          // target below is set to compensate.
+          var t = ((deg + REST_DEG) % 360 + 360) % 360;
           var i = Math.round((t / 360) * FRAMES) % FRAMES;
           if (i === seq.last) return;
           seq.last = i;
