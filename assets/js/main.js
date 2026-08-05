@@ -160,6 +160,25 @@
 
     gsap.set(wordmark, { opacity: 0, y: 46, scale: 0.97 });
 
+    /* The turn is the one part of this that wants real geometry, so it is the
+       only part that comes from rendered frames. Tilt, scale, lift and fade
+       stay as CSS transforms on the parent, which keeps them responsive, free
+       to animate, and identical whether the frames ever arrive or not.
+
+       Both paths read the same angle out of `spin`, so the still-image
+       fallback and the rendered sequence describe the same motion — the
+       sequence just shows the far side of the piece instead of implying it. */
+    var spin = { deg: 0 };
+    var seq = null;
+
+    function applySpin() {
+      if (seq) {
+        seq.draw(spin.deg);
+      } else {
+        gsap.set(knight, { rotateY: spin.deg });
+      }
+    }
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -167,32 +186,49 @@
           start: "top top",
           end: "bottom bottom",
           scrub: 1.4,
+          onUpdate: applySpin,
         },
       })
       .to(cue, { opacity: 0, y: 14, duration: 0.1 }, 0)
+      /* A turn and a bit, finishing somewhere deliberate: 390 lands on 30deg,
+         a shallow forward three-quarter — the head still points left as the
+         mark does, but turned far enough toward the viewer to show the front of
+         the face rather than its edge. The sequence is rendered every 3deg, so
+         30 is the lattice point next to the 29 that was asked for; a degree of
+         yaw on a piece this size is below what the eye resolves. Two full turns
+         read as frantic at this scrub, and the pacing was tuned once already. */
+      .to(spin, { deg: 190, ease: "none", duration: 0.34 }, 0)
+      .to(spin, { deg: 390, ease: "power2.out", duration: 0.38 }, 0.34)
       .to(
         knight,
         {
-          rotate: -16,
-          rotateY: 190,
-          rotateX: 10,
-          scale: 1.06,
-          y: "5vh",
+          rotate: -14,
+          rotateX: 8,
+          scale: 1.14,
+          y: "6vh",
           ease: "none",
           duration: 0.34,
         },
         0
       )
+      /* It descends and settles rather than leaving. The piece stops being the
+         subject and becomes the ground the name sits on, so it has to come to
+         rest upright — a piece still tilted mid-fall reads as an accident
+         behind static type — and drop to a weight type can be read over. */
       .to(
         knight,
         {
-          rotate: -72,
-          rotateY: 415,
+          rotate: 0,
           rotateX: 0,
-          scale: 0.58,
-          y: "-108vh",
-          opacity: 0,
-          ease: "power2.in",
+          scale: 1.5,
+          /* 26vh, not 30: the stage clips, and at 30 the base was cut by about
+             15px — the same severed-base look the piece cutouts were rebuilt to
+             get rid of. */
+          y: "26vh",
+          /* on navy a white piece needs more than the 0.3 the captures use on
+             off-white; the ground is darker, so the same alpha reads fainter */
+          opacity: 0.38,
+          ease: "power2.out",
           duration: 0.38,
         },
         0.34
@@ -203,6 +239,93 @@
         0.44
       )
       .to(wordmark, { duration: 0.26 }, 0.74);
+
+    /* Loaded after the page is usable, never as part of it: two megabytes of
+       turntable must not compete with the first paint for a flourish nobody has
+       scrolled to yet.
+
+       Tiled into four sheets rather than 120 loose files. That is four requests
+       instead of 120, it compresses better than the frames did separately, and
+       it clears the 100-file ceiling on GitHub's uploader. Thirty per sheet
+       keeps any single decode near 36MB — one sheet of all 120 would be a 36
+       megapixel allocation before a single frame is drawn.
+
+       Skipped entirely below 900px, where holding the decoded turn is real
+       memory on a phone for a knight two inches tall. */
+    var FRAMES = 120;
+    var FRAME_W = 430;
+    var FRAME_H = 700;
+    var COLS = 6;
+    var PER_SHEET = 30;
+    var SHEETS = FRAMES / PER_SHEET;
+
+    var canvas = knight.querySelector(".hero__spin");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function loadSequence() {
+      if (!canvas || seq || innerWidth < 900 || reduce.matches) return;
+
+      var sheets = [];
+      var loaded = 0;
+      var failed = false;
+
+      for (var i = 0; i < SHEETS; i++) {
+        var im = new Image();
+        im.onload = function () {
+          if (++loaded === SHEETS && !failed) ready(sheets);
+        };
+        // a missing sheet is thirty missing angles — a quarter of the turn
+        // gone — so a failure keeps the still rather than running with holes
+        im.onerror = function () {
+          failed = true;
+        };
+        im.src = "assets/img/knight-spin/spin_" + i + ".png";
+        sheets.push(im);
+      }
+    }
+
+    function ready(sheets) {
+      var ctx = canvas.getContext("2d");
+      seq = {
+        draw: function (deg) {
+          var t = ((deg % 360) + 360) % 360;
+          var i = Math.round((t / 360) * FRAMES) % FRAMES;
+          if (i === seq.last) return;
+          seq.last = i;
+          var cell = i % PER_SHEET;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(
+            sheets[(i / PER_SHEET) | 0],
+            (cell % COLS) * FRAME_W,
+            ((cell / COLS) | 0) * FRAME_H,
+            FRAME_W,
+            FRAME_H,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+        },
+        last: -1,
+      };
+      // the CSS rotateY the fallback was using has to go, or the frames and the
+      // transform would both turn the piece
+      gsap.set(knight, { rotateY: 0 });
+      seq.draw(spin.deg);
+      knight.classList.add("is-spinning");
+    }
+
+    if (document.readyState === "complete") loadSequence();
+    else window.addEventListener("load", loadSequence);
+
+    // A window dragged wider, or a tablet turned landscape, crosses the gate
+    // after load. loadSequence returns early once `seq` exists, so re-arming it
+    // here is free and it only ever fires the fetch once.
+    var spinResize;
+    window.addEventListener("resize", function () {
+      clearTimeout(spinResize);
+      spinResize = setTimeout(loadSequence, 200);
+    });
   }
 
   /* ---------- capture: one section, one piece taken ----------

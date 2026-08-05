@@ -557,7 +557,10 @@ p {
   left: 0;
   right: 0;
   margin-inline: auto;
-  z-index: 2;
+  /* Behind the wordmark, not in front of it. The piece used to leave before the
+     name arrived so stacking never mattered; now it comes to rest underneath it
+     and the type has to win. */
+  z-index: 0;
   width: clamp(7rem, 18vw, 12rem);
   transform-style: preserve-3d;
 }
@@ -565,6 +568,27 @@ p {
 .hero__knight img {
   width: 100%;
   height: auto;
+}
+
+/* The rendered turntable replaces the flat mark only once every frame has
+   decoded — swapping earlier would show a gap where the knight should be. The
+   canvas sits exactly on top of the still, so the handover is invisible: same
+   box, same position, and the CSS transforms driving tilt, scale and lift are
+   on the shared parent, so they never stop or restart. */
+.hero__spin {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+}
+
+.hero__knight.is-spinning img {
+  visibility: hidden;
+}
+
+.hero__knight.is-spinning .hero__spin {
+  display: block;
 }
 
 .hero__cue {
