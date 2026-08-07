@@ -399,9 +399,11 @@ p {
   align-items: center;
   justify-content: center;
   background: none;
-  /* navy-400 measured 1.94:1 against the ground, under the 3:1 floor for a
-     control boundary. facet-mid is the next step that clears it. */
-  border: 1px solid var(--facet-mid);
+  /* No boundary. WCAG 1.4.11 asks for 3:1 on whatever identifies a control —
+     here that is the bars themselves at 12:1, not a box drawn round them, so
+     the box is not carrying any of the load. The focus ring is an outline
+     rather than a border and is unaffected. */
+  border: 0;
   cursor: pointer;
   color: var(--on-navy);
 }
@@ -1307,24 +1309,69 @@ main {
   }
 
   .hero__stage {
-    position: static;
+    /* relative, not static: the piece and the cue are both absolute and need
+       this box to anchor to rather than the section behind it.
+
+       And top has to be cleared with it. The sheet epilogue sets
+       `top: var(--stick)` for the sticky desktop stage, where it is the offset
+       the stage parks at; on a relative box the same declaration is a plain
+       downward shove. It pushed the stage 88px below the hero, which hung the
+       cue outside the card onto the section beneath and left an empty band
+       across the top that no amount of padding was ever going to close. */
+    position: relative;
+    top: 0;
     height: auto;
-    /* tall enough that the piece behind the type is not clipped by the stage */
-    min-height: 27rem;
-    padding-block: clamp(3.5rem, 11vh, 6rem) clamp(3rem, 8vh, 4.5rem);
+    /* Fills the screen, as the desktop stage does. At a fixed 27rem it was
+       about half a phone, which made the opening read as a banner above the
+       fold rather than an arrival. svh rather than vh so the browser chrome
+       collapsing mid-scroll does not resize it. */
+    min-height: calc(100vh - var(--stick) - var(--gap));
+    min-height: calc(100svh - var(--stick) - var(--gap));
+    /* tighter than the desktop stage: every rem here is height the piece
+       cannot use, and filling the screen was the point */
+    padding-block: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  /* The wordmark carries a top pad that offsets it against the desktop stage,
+     where the piece starts above it. Here the piece is centred behind it, so
+     the pad only pushed the whole composition into the lower half of a screen
+     it had just been told to fill. */
+  .hero__wordmark {
+    padding-top: 0;
+  }
+
+  /* The composition sits above the cue rather than centred in the whole stage.
+     Centred, the piece's narrow head left the top reading empty while its base
+     crowded the cue at the bottom; lifting the whole group clears a band for
+     the cue and puts the visual mass where the eye lands first. */
+  .hero__stage {
+    /* The group stays centred — align-content: start pulled the wordmark to the
+       top of the stage while the piece stayed put, and the two came apart. A
+       heavier bottom pad lifts the centre instead, which moves both together
+       and reserves the band the cue sits in. */
+    padding-top: clamp(1.25rem, 3vh, 2rem);
+    padding-bottom: clamp(2.5rem, 7vh, 3.5rem);
+  }
+
+  .hero__cue {
+    bottom: 2.25rem;
   }
 
   .hero__knight {
-    top: 50%;
-    transform: translateY(-48%);
-    width: clamp(10rem, 46vw, 15rem);
+    /* 48%: the gap to the cue is set by where this lands and where the cue
+       sits, not by the stage's padding — both are absolutely positioned, so
+       padding only ever moved the wordmark between them. Dropping the piece
+       three points and lifting the cue closes the gap from 67px to ~31 without
+       resizing anything or pulling the type off the piece. */
+    top: 48%;
+    transform: translateY(-50%);
+    /* Sized against the stage height rather than the width, so it fills a tall
+       screen instead of a wide one — 0.614 is the frame's own 430:700 aspect.
+       Held to 0.70 of the stage rather than 0.78: the extra height was coming
+       out of the band the cue needs. */
+    width: min(72vw, calc((100svh - var(--stick) - var(--gap)) * 0.70 * 0.614));
     /* the weight the desktop hero settles to, so type still reads over it */
     opacity: 0.38;
-  }
-
-  /* the cue pointed at the sequence, and the sequence is gone */
-  .hero__cue {
-    display: none;
   }
 }
 
