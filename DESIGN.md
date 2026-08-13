@@ -173,7 +173,7 @@ A single drenched indigo world with off-white relief and no accent hue; the only
 ### Neutral
 - **Relief Off-White** (`off-white`): The relief blocks — `.section--light` and the contact band — and the text color of buttons that invert on those blocks.
 - **Struck White** (`white`): Reserved for emphasis, never for large fields. Button fills, the nav underline, focus outlines, selection background, footer group labels, and the knight's lit planes.
-- **Facet Light** (`facet-light`): The mark's mid plane, borrowed for type that belongs to the mark's world — the second line of the hero title, member initials, the scroll cue's gradient tick, and the chess notation labels.
+- **Facet Light** (`facet-light`): The mark's mid plane, borrowed for type that belongs to the mark's world — the second line of the hero title, the scroll cue's gradient tick, and the chess notation labels.
 - **Facet Mid** (`facet-mid`): The mark's shadow plane. Small tracked labels only: service tags, step numerals, and member roles.
 - **On-Navy Primary** (`on-navy`): Default body text on the ground.
 - **On-Navy Secondary** (`on-navy-2`): Supporting copy on the ground — ledes, service descriptions, bios, resting nav links, footer text.
@@ -271,7 +271,7 @@ Assets are indexed PNGs quantised to 64 colours (212KB for all six, down from 83
 - **Focus:** 2px `white` outline at 3px offset, from the global `:focus-visible` rule.
 
 ### Cards / Containers
-Nothing *inside* a block is a card. Groupings are expressed as ruled rows (`.offer__row`, `.steps li`) — a top rule on the container, a bottom rule per row, generous `clamp(1.5rem, 3vw, 3.25rem)` vertical padding, and no background, border box, or radius. The only filled container is the member portrait tile: `navy-600` fill, `4 / 5` ratio, conic checker texture, and oversized `facet-light` initials centered in it.
+Nothing *inside* a block is a card. Groupings are expressed as ruled rows (`.offer__row`, `.steps li`) — a top rule on the container, a bottom rule per row, generous `clamp(1.5rem, 3vw, 3.25rem)` vertical padding, and no background, border box, or radius. The only filled container is the member portrait tile: `navy-600` fill, `4 / 5` ratio, and a conic checker texture. It holds a `4 / 5` photograph (`.member__photo`, `object-fit: cover`); the fill and checker are what show before the image decodes or if it is missing.
 
 ### Navigation
 Uppercase Archivo labels at `on-navy-2`, resolving to `white` on hover and for `[aria-current="page"]`. The active and hover indicator is a 2px `white` underline drawn by a pseudo-element that scales in from the left over 0.4s — the rule is always present at `scaleX(0)`, so the state change is a transform, never a layout change.

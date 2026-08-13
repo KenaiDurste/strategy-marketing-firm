@@ -108,6 +108,11 @@
   --space-xl: 3rem;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* --ease is a hard ease-out: it covers most of its distance in the first
+     fifth of the duration, which is right for something arriving and settling,
+     and wrong for anything whose travel is the point — a fill that grows reads
+     as a snap on that curve. This one starts gently, so the climb is visible. */
+  --ease-rise: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *,
@@ -279,8 +284,15 @@ p {
     border-color 0.4s var(--ease);
 }
 
+/* State rules own the colour channel only — background-color, never the
+   `background` shorthand. The shorthand resets every longhand it doesn't
+   name (image, repeat, position, origin, size), and a :hover rule outranks a
+   variant's resting declarations, so a shorthand here silently strips the
+   background layers off any variant the moment the pointer lands. Keeping
+   these to the longhand is what lets .btn--rule below paint its own layers
+   without the base component needing to know it exists. */
 .btn:hover {
-  background: transparent;
+  background-color: transparent;
   color: var(--white);
 }
 
@@ -291,8 +303,57 @@ p {
 }
 
 :is(.section--light, .contact, .capture) .btn:hover {
-  background: transparent;
+  background-color: transparent;
   color: var(--navy);
+}
+
+/* The quiet CTA: no fill, just the label sitting on a rule, filling with navy
+   on hover. Used where the button should read as an imprint rather than a
+   request.
+
+   --pad-x is the one measurement this component is built from: it sets the
+   horizontal padding, the negative margin that cancels it, the rule's inset,
+   and (doubled) how much the rule is shorter than the box. Change it once.
+   The negative margin is what keeps the label flush with the copy above while
+   still giving the hover fill a box to paint into — no layout property has to
+   animate, and the hover target never changes size under the pointer.
+
+   Two background layers. Layer one is the fill, held at zero height along the
+   bottom edge; layer two is the resting 2px rule. border-bottom is kept at
+   `transparent` rather than removed: paired with background-origin: border-box
+   it reserves the 2px strip the rule layer paints into. Hovering grows the
+   fill up from the rule and covers it — the line is never animated away, it
+   becomes the block. background-size is absent from the reduced-motion
+   transition list at the foot of this file, so that growth snaps while the
+   label colour still eases. */
+:is(.section--light, .contact, .capture) .btn--rule {
+  --pad-x: 1.35rem;
+  padding: var(--space-sm) var(--pad-x);
+  margin: 0 calc(var(--pad-x) * -1);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  background-image: linear-gradient(var(--navy), var(--navy)),
+    linear-gradient(var(--navy), var(--navy));
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-position: left bottom, var(--pad-x) bottom;
+  background-size: 100% 0%, calc(100% - var(--pad-x) * 2) 2px;
+  color: var(--navy);
+  letter-spacing: 0.14em;
+  /* Leaving is quicker than arriving, and the label drops back to navy
+     immediately rather than waiting for the fill to clear. */
+  transition: background-size 0.4s var(--ease-rise), color 0.12s linear;
+}
+
+:is(.section--light, .contact, .capture) .btn--rule:hover {
+  background-size: 100% 100%, calc(100% - var(--pad-x) * 2) 2px;
+  color: var(--off-white);
+  /* Arriving is its own timing, declared here because the transition that
+     runs on hover-in is the one on the hovered style. Slower than leaving so
+     the rise is legible, and the label holds navy until the fill is most of
+     the way up — flip it early and the text washes out against bare ground. */
+  transition: background-size 0.52s var(--ease-rise), color 0.12s linear 0.3s;
 }
 
 /* ---------- header ---------- */
@@ -771,6 +832,9 @@ p {
   overflow: hidden;
 }
 
+/* Every portrait now carries a photo, so this board pattern is what shows in
+   the gap before a lazy image decodes, or permanently if one 404s. It is the
+   portrait's fallback state, not a layer of the finished design. */
 .member__portrait::before {
   content: "";
   position: absolute;
@@ -784,14 +848,14 @@ p {
   background-size: 44px 44px;
 }
 
-.member__initials {
+/* Sits above the checker on its own, without a z-index, because ::before is
+   painted before a positioned sibling. The portrait box already clips, so
+   cover crops rather than distorts on any column width. */
+.member__photo {
   position: relative;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-stretch: 112%;
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-  letter-spacing: -0.02em;
-  color: var(--facet-light);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .member h3 {
